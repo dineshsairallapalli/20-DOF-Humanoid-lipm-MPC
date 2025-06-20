@@ -63,7 +63,7 @@ Where:
 * $\tau = \sqrt{z_0 / g}$
 * $x_0, \dot{x}_0$: initial CoM state
 
-#### ✅ Discrete LIPM Dynamics (state-space)
+#### Discrete LIPM Dynamics (state-space)
 
 $$
 \begin{bmatrix}
