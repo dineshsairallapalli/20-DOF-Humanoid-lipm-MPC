@@ -118,27 +118,6 @@ python scripts\run_simulation.py
 ```cmd
 python -m lipm_mpc.lipm_mpc_fast --model models\op3_scene.xml --horizon 10 --step_time 0.5 --total_time 15.0
 ```
-
-## 📁 Repository Structure
-
-Clearly structured for ease of use and clarity.
-
-## 🔬 Validation and Performance
-
-Comprehensive testing for performance verification and stability.
-
-## 📚 Documentation
-
-Detailed theoretical and practical insights in `docs\architecture.md`.
-
-## 🤝 Contributing Guidelines
-
-Open for contributions; follow the previously provided steps.
-
-## 📜 License
-
-MIT License. See [LICENSE.md](LICENSE.md) for details.
-
 ---
 
 Dedicated to advancing humanoid robotics research with robust simulation and advanced control methodologies using Robotis OP3, LIPM, MPC, PD control, and MuJoCo on Windows.
