@@ -9,7 +9,7 @@ This repository contains an advanced implementation of a 20-Degree-of-Freedom (2
 * **Proportional-Derivative (PD) Control**: For low-level joint tracking.
 * **MuJoCo**: High-performance physics engine.
 
-The entire system is implemented in Python and tested under **Windows 10/11** using MuJoCo 2.x.
+The entire system is implemented in Python and tested under **Windows 10/11** using MuJoCo.
 
 ---
 
