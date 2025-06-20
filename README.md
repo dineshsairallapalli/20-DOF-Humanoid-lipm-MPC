@@ -25,7 +25,7 @@ MuJoCo model file: `models/op3_scene.xml`
 
 ---
 
-## ⚙️ System Architecture
+## System Architecture
 
 ```text
 [ LIPM-MPC Controller ]  --->  Footstep Targets
@@ -39,15 +39,15 @@ MuJoCo model file: `models/op3_scene.xml`
 
 ---
 
-## 📚 Mathematical Foundation
+## Mathematical Foundation
 
-### 🔷 Linear Inverted Pendulum Model (LIPM)
+### Linear Inverted Pendulum Model (LIPM)
 
 The LIPM is a simplified dynamic model widely utilized in humanoid robotics. It treats the robot's Center of Mass (CoM) as a single point mass, connected via a massless leg pivoting around the foot placement:
 
 $\ddot{x}(t) = \frac{g}{z_0}(x(t) - p)$
 
-#### ✅ General Solution
+#### General Solution
 
 The general time-domain solution is:
 
@@ -160,7 +160,7 @@ This PD controller runs at every MuJoCo step to enforce smooth joint behavior.
 
 ## Code Overview
 
-### Main Script – `lipm_mpc_fast.py`
+### Main Script – `lipm_mpc.py`
 
 ```python
 model = mujoco.MjModel.from_xml_path(model_path)
@@ -185,7 +185,7 @@ for step in sim_time:
 
 ---
 
-## 🧪 Tuning and Parameters
+## Tuning and Parameters
 
 | Parameter   | Description                       | Suggested Value        |
 | ----------- | --------------------------------- | ---------------------- |
@@ -197,7 +197,7 @@ for step in sim_time:
 
 ---
 
-## 🛠 Windows Installation Guide
+## Windows Installation Guide
 
 ### Prerequisites
 
@@ -253,13 +253,13 @@ pip install -e .
 ### Quick Start
 
 ```cmd
-python scripts\run_simulation.py
+python scripts\lipm_mpc.py
 ```
 
 ### Custom Parameters
 
 ```cmd
-python -m lipm_mpc.lipm_mpc_fast --model models\op3_scene.xml --horizon 10 --step_time 0.5 --total_time 15.0
+python -m lipm_mpc.lipm_mpc --model models\op3_scene.xml --horizon 10 --step_time 0.5 --total_time 15.0
 ```
 ---
 
