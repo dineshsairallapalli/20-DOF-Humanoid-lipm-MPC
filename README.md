@@ -128,28 +128,6 @@ To customize parameters such as horizon, step time, and simulation duration, use
 ```cmd
 python -m lipm_mpc.lipm_mpc_fast --model models\op3_scene.xml --horizon 10 --step_time 0.5 --total_time 15.0
 ```
-
-## 📁 Repository Structure
-
-Outlined clearly in the initial sections for navigation ease.
-
-## 🔬 Validation and Performance
-
-* Performance and stability tests located in `tests\`.
-* Results and validation procedures detailed within documentation.
-
-## 📚 Detailed Documentation
-
-Comprehensive theoretical insights and implementation details are provided in `docs\architecture.md`.
-
-## 🤝 Contributing Guidelines
-
-Contributions are welcomed and encouraged. Follow the previously outlined contributing steps.
-
-## 📜 License
-
-This project is licensed under the MIT License. See [LICENSE.md](LICENSE.md) for complete details.
-
 ---
 
 Dedicated to advancing humanoid robotics research through detailed simulation and control methodology using Robotis OP3, LIPM, MPC, and MuJoCo on Windows.
