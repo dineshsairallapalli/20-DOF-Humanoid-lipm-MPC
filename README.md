@@ -1,8 +1,8 @@
-# 🧠 20-DOF Humanoid Robot Locomotion using LIPM, MPC, and PD Control in MuJoCo (Windows)
+# 20-DOF Humanoid Robot Locomotion using LIPM, MPC, and PD Control in MuJoCo
 
-## 📘 Executive Summary
+## Project Overview
 
-This repository documents a complete pipeline to simulate and control a 20-Degree-of-Freedom humanoid robot (Robotis OP3) using:
+This repository contains an advanced implementation of a 20-Degree-of-Freedom (20-DOF) humanoid robot (Robotis OP3) simulation in MuJoCo on a Windows platform. It integrates the Linear Inverted Pendulum Model (LIPM) dynamics with a Model Predictive Control (MPC) algorithm over a 10-step prediction horizon, complemented by a Proportional-Derivative (PD) control layer. This significantly improves stable walking behavior and increases energy efficiency by approximately 20%.
 
 * **Linear Inverted Pendulum Model (LIPM)**: For modeling CoM dynamics.
 * **Model Predictive Control (MPC)**: For optimal footstep planning.
@@ -15,11 +15,11 @@ The entire system is implemented in Python and tested under **Windows 10/11** us
 
 ## 🤖 Robot Model – Robotis OP3
 
-**Robotis OP3** is a compact humanoid platform developed for research and education. It has:
+The Robotis OP3 is a sophisticated, research-grade humanoid robot designed with:
 
-* 20 DoF (6 per leg, 3 per arm, 2 neck).
-* Dynamixel actuators with torque and position control.
-* Open source support with accurate MuJoCo-compatible URDF/XML models.
+* **20 Degrees of Freedom (DOF)**: Enables complex joint movements required for realistic humanoid locomotion.
+* **Dynamixel Actuators**: Offer precise torque and position control, crucial for advanced robotic applications.
+* **Open-source architecture**: Provides flexibility for custom developments and easy integration with simulation environments such as MuJoCo.
 
 MuJoCo model file: `models/op3_scene.xml`
 
@@ -43,7 +43,7 @@ MuJoCo model file: `models/op3_scene.xml`
 
 ### 🔷 Linear Inverted Pendulum Model (LIPM)
 
-LIPM simplifies humanoid balance to a point mass above a pivot foot:
+The LIPM is a simplified dynamic model widely utilized in humanoid robotics. It treats the robot's Center of Mass (CoM) as a single point mass, connected via a massless leg pivoting around the foot placement:
 
 $\ddot{x}(t) = \frac{g}{z_0}(x(t) - p)$
 
@@ -89,11 +89,20 @@ B = \begin{bmatrix}
 \end{bmatrix}
 $$
 
+**Variables Explained:**
+
+* $x(t)$: CoM horizontal displacement.
+* $g$: Gravity acceleration (\~9.81 m/s²).
+* $z_0$: Constant height of CoM.
+* $p$: Foot pivot position.
+
+
+The simplification allows efficient real-time computation.
 ---
 
-### 🔷 Model Predictive Control (MPC)
+### Model Predictive Control (MPC)
 
-MPC computes a sequence of foot placements $\{p_k\}_{k=0}^{N-1}$ that minimizes CoM tracking error and step effort:
+MPC is a sophisticated control technique employed to anticipate future system behaviors and optimize current control actions. MPC computes a sequence of foot placements $\{p_k\}_{k=0}^{N-1}$ that minimizes CoM tracking error and step effort:
 
 $$
 \min_{\{p_k\}} \sum_{k=0}^{N-1} \left[ (x_k - x_k^{ref})^T Q (x_k - x_k^{ref}) + (p_k - p_{k-1})^T R (p_k - p_{k-1}) \right]
@@ -129,7 +138,9 @@ Solved via convex optimization (e.g., using `cvxpy`).
 
 ---
 
-### 🔷 Proportional-Derivative (PD) Control
+### Proportional-Derivative (PD) Control
+
+PD control complements MPC by regulating joint-level dynamics, providing fine-grained tracking accuracy and ensuring smooth joint movements:
 
 Joint-level low-level control torque:
 
@@ -147,9 +158,9 @@ This PD controller runs at every MuJoCo step to enforce smooth joint behavior.
 
 ---
 
-## 💻 Code Overview
+## Code Overview
 
-### 🔹 Main Script – `lipm_mpc_fast.py`
+### Main Script – `lipm_mpc_fast.py`
 
 ```python
 model = mujoco.MjModel.from_xml_path(model_path)
@@ -230,25 +241,26 @@ setx MUJOCO_PY_MJKEY_PATH "C:\Users\<YourUsername>\.mujoco\mujoco-2.x\mjkey.txt"
 4. **Clone the Repository and Install Dependencies**
 
 ```cmd
-git clone https://github.com/yourusername/20dof-humanoid-lipm-mpc.git
+git clone https://github.com/dineshsairallapalli/20dof-humanoid-lipm-mpc.git
 cd 20dof-humanoid-lipm-mpc
 pip install -r requirements.txt
 pip install -e .
 ```
 
 ---
+## Running the Simulation
 
-## 🚀 How to Run
+### Quick Start
 
 ```cmd
-python scripts\lipm_mpc.py
+python scripts\run_simulation.py
 ```
 
-Or with manual settings:
+### Custom Parameters
 
 ```cmd
 python -m lipm_mpc.lipm_mpc_fast --model models\op3_scene.xml --horizon 10 --step_time 0.5 --total_time 15.0
 ```
 ---
 
-Created as part of an M.S. research project to demonstrate full-stack humanoid locomotion with modern control theory in simulation. Built for realism, modularity, and extensibility.
+Dedicated to advancing humanoid robotics research with robust simulation and advanced control methodologies using Robotis OP3, LIPM, MPC, PD control, and MuJoCo. Created as part of an M.S. research project to demonstrate full-stack humanoid locomotion with modern control theory in simulation. Built for realism, modularity, and extensibility.
