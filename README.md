@@ -105,7 +105,7 @@ setx MUJOCO_PY_MJKEY_PATH "C:\Users\<YourUsername>\.mujoco\mujoco-2.x\mjkey.txt"
 Open Command Prompt:
 
 ```cmd
-git clone https://github.com/yourusername/20dof-humanoid-lipm-mpc.git
+git clone https://github.com/dineshsairallapalli/20dof-humanoid-lipm-mpc.git
 cd 20dof-humanoid-lipm-mpc
 pip install mujoco mujoco-py numpy cvxpy
 pip install -e .
