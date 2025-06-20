@@ -49,69 +49,106 @@ Here,
 * $Q$ and $R$ are weighting matrices balancing the tracking accuracy of the reference trajectory $x_{ref}$ and the smoothness of control actions.
 * $N$ represents the prediction horizon length.
 
-## 🖥️ Code and Control Implementation
-
-### Core Controller Concepts
-
-The MPC controller implemented in `lipm_mpc_fast.py` uses the linearized discrete-time version of LIPM dynamics. It solves the optimization problem iteratively at each simulation timestep, providing a dynamically optimal foot placement to maintain stability.
-
-### Key Functions and Files:
-
-* `lipm_mpc_fast.py`: Core MPC logic, implementing the optimization and updating control actions.
-* `op3_scene.xml`: MuJoCo model of Robotis OP3, including physical properties and initial configurations.
-
-### Tuning the MPC Controller
-
-Controller tuning involves adjusting key parameters:
-
-* **Prediction Horizon (`N`)**: Determines how far into the future the MPC predicts. A longer horizon provides better stability at computational cost.
-* **Weight Matrices (`Q` and `R`)**: Balances tracking accuracy and smoothness of control actions. Typically tuned via trial and error or systematic approaches.
-* **Step Size (`step_time`)**: Affects responsiveness and stability. Shorter steps make the robot responsive but may introduce instability if too short.
-
-Adjust these parameters in the script or through command-line arguments to achieve the desired performance:
-
-```cmd
-python -m lipm_mpc.lipm_mpc_fast --model models\op3_scene.xml --horizon 10 --step_time 0.5 --total_time 15.0
-```
-
 ## 🛠️ Windows Installation Guide
 
-Please follow the previously outlined installation steps carefully for a successful setup.
+### Prerequisites
+
+* **Windows 10 or later**
+* **Python ≥ 3.8** ([Download Python](https://www.python.org/downloads/windows/))
+* **MuJoCo ≥ 2.x** ([Download MuJoCo](https://github.com/deepmind/mujoco/releases))
+* **Visual Studio C++ Build Tools** ([Download here](https://visualstudio.microsoft.com/visual-cpp-build-tools/))
+* **Git** ([Download Git](https://git-scm.com/downloads))
+
+### Installation Steps
+
+1. **Install Python and create a virtual environment:**
+
+* Install Python and ensure it’s added to your PATH during installation.
+* Open Command Prompt:
+
+```cmd
+python -m venv venv
+venv\Scripts\activate
+pip install --upgrade pip
+```
+
+2. **Install MuJoCo:**
+
+* Extract the downloaded MuJoCo archive to:
+
+  ```
+  C:\Users\<YourUsername>\.mujoco\mujoco-2.x
+  ```
+
+* Obtain and place your MuJoCo license key (`mjkey.txt`) in the directory:
+
+  ```
+  C:\Users\<YourUsername>\.mujoco\mujoco-2.x\mjkey.txt
+  ```
+
+* Set MuJoCo environment variables (open a new Command Prompt as administrator):
+
+```cmd
+setx MUJOCO_PY_MUJOCO_PATH "C:\Users\<YourUsername>\.mujoco\mujoco-2.x" /M
+setx MUJOCO_PY_MJKEY_PATH "C:\Users\<YourUsername>\.mujoco\mujoco-2.x\mjkey.txt" /M
+```
+
+**Restart Command Prompt after this step.**
+
+3. **Install Visual Studio Build Tools:**
+
+* Run the installer downloaded earlier.
+* Select "Desktop Development with C++" and complete the installation.
+
+4. **Clone the Repository and Install Dependencies:**
+
+Open Command Prompt:
+
+```cmd
+git clone https://github.com/yourusername/20dof-humanoid-lipm-mpc.git
+cd 20dof-humanoid-lipm-mpc
+pip install mujoco mujoco-py numpy cvxpy
+pip install -e .
+```
 
 ## 🚩 Simulation Execution
 
 ### Quick Start
 
+In Command Prompt, execute:
+
 ```cmd
 python scripts\run_simulation.py
 ```
 
+### Custom Run Parameters
+
+To customize parameters such as horizon, step time, and simulation duration, use:
+
+```cmd
+python -m lipm_mpc.lipm_mpc_fast --model models\op3_scene.xml --horizon 10 --step_time 0.5 --total_time 15.0
+```
+
 ## 📁 Repository Structure
 
-The structure is clearly outlined above for easy navigation and understanding.
+Outlined clearly in the initial sections for navigation ease.
 
 ## 🔬 Validation and Performance
 
-* Tests in `tests\` confirm the controller’s performance and stability.
-* Performance metrics and validation procedures are detailed in the documentation.
+* Performance and stability tests located in `tests\`.
+* Results and validation procedures detailed within documentation.
 
 ## 📚 Detailed Documentation
 
-For further details, theoretical insights, and implementation specifics, refer to the comprehensive documentation in `docs\architecture.md`.
+Comprehensive theoretical insights and implementation details are provided in `docs\architecture.md`.
 
 ## 🤝 Contributing Guidelines
 
-Contributions are highly welcomed:
-
-* Fork the repository.
-* Create a feature branch (`git checkout -b feature-name`).
-* Commit your changes (`git commit -m "feature details"`).
-* Push your branch (`git push origin feature-name`).
-* Open a Pull Request.
+Contributions are welcomed and encouraged. Follow the previously outlined contributing steps.
 
 ## 📜 License
 
-This project is licensed under the MIT License. See [LICENSE.md](LICENSE.md) for full details.
+This project is licensed under the MIT License. See [LICENSE.md](LICENSE.md) for complete details.
 
 ---
 
